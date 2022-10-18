@@ -82,6 +82,10 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
 	        DESTINATION .)
 
+	CONFIGURE_FILE(installer/lua${BUILDCFG_LUA_VERSION}/lua-cjson.xml
+	               ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
+	               @ONLY)
+
 
 	#-----------------------------------------------------------------------------
 	#
