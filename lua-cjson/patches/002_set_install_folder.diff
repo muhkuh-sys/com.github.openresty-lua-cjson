@@ -1,0 +1,24 @@
+diff -uNr lua-cjson-2.1.0.9/CMakeLists.txt lua-cjson-2.1.0.9_patched/CMakeLists.txt
+--- lua-cjson-2.1.0.9/CMakeLists.txt	2021-02-15 19:58:29.000000000 +0100
++++ lua-cjson-2.1.0.9_patched/CMakeLists.txt	2022-10-18 13:50:55.698924823 +0200
+@@ -61,16 +61,16 @@
+ if(WIN32)
+     # Win32 modules need to be linked to the Lua library.
+     set(_MODULE_LINK ${LUA_LIBRARY} ${_MODULE_LINK})
+-    set(_lua_module_dir "${_lua_lib_dir}")
++#    set(_lua_module_dir "${_lua_lib_dir}")
+     # Windows sprintf()/strtod() handle NaN/inf differently. Not supported.
+     add_definitions(-DDISABLE_INVALID_NUMBERS)
+-else()
+-    set(_lua_module_dir "${_lua_lib_dir}/lua/5.1")
++#else()
++#    set(_lua_module_dir "${_lua_lib_dir}/lua/5.1")
+ endif()
+ 
+ add_library(cjson MODULE lua_cjson.c strbuf.c ${FPCONV_SOURCES})
+ set_target_properties(cjson PROPERTIES PREFIX "")
+ target_link_libraries(cjson ${_MODULE_LINK})
+-install(TARGETS cjson DESTINATION "${_lua_module_dir}")
++install(TARGETS cjson DESTINATION "${INSTALL_DIR_LUA_MODULES}")
+ 
+ # vi:ai et sw=4 ts=4:
