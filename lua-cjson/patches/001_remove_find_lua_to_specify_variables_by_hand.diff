@@ -1,0 +1,12 @@
+diff -uNr lua-cjson-2.1.0.9/CMakeLists.txt lua-cjson-2.1.0.9_patched/CMakeLists.txt
+--- lua-cjson-2.1.0.9/CMakeLists.txt	2021-02-15 19:58:29.000000000 +0100
++++ lua-cjson-2.1.0.9_patched/CMakeLists.txt	2022-10-18 12:49:01.497158832 +0200
+@@ -15,7 +15,7 @@
+         FORCE)
+ endif()
+ 
+-find_package(Lua REQUIRED)
++#find_package(Lua REQUIRED)
+ include_directories(${LUA_INCLUDE_DIR})
+ 
+ if(NOT USE_INTERNAL_FPCONV)

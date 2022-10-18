@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jonchki-artifact version="1.0">
+	<info group="com.github.openresty"
+	      module="lua-cjson"
+	      artifact="lua5.1-lua-cjson"
+	      version="@PROJECT_VERSION@"
+	      vcs-id="@PROJECT_VERSION_VCS@"
+	      extension="tar.xz"
+	      platform="@JONCHKI_PLATFORM@">
+		<license name="MIT"/>
+		<author name="Mark Pulford, OpenResty Team" url="https://github.com/openresty/lua-cjson" />
+		<description>Lua CJSON is a fast JSON encoding/parsing module for Lua.</description>
+	</info>
+	<dependencies>
+		<build-dependency group="org.lua" module="lua" artifact="lua" version="5.1"/>
+	</dependencies>
+</jonchki-artifact>
