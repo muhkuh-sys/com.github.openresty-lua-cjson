@@ -54,7 +54,7 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	#
 	SET(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_BINARY_DIR}/../../repository/com/github/openresty/lua-cjson/${PROJECT_VERSION})
 	SET(CPACK_INCLUDE_TOPLEVEL_DIRECTORY FALSE)
-	SET(CPACK_PACKAGE_FILE_NAME "lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}")
+	SET(CPACK_PACKAGE_FILE_NAME "lua${BUILDCFG_LUA_VERSION}-lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}")
 
 	SET(CPACK_GENERATOR "TXZ")
 	INCLUDE(CPack)
@@ -91,8 +91,8 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	ADD_CUSTOM_TARGET(pack
 	                  COMMAND ${CMAKE_MAKE_PROGRAM}
 	                  COMMAND ${CMAKE_MAKE_PROGRAM} package
-	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
-	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.tar.xz
+	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.xml
+	                  COMMAND "${PYTHON_EXECUTABLE}" ${CMAKE_HOME_DIRECTORY}/cmake/tools/generate_hash.py ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-lua-cjson-${PROJECT_VERSION}-${JONCHKI_PLATFORM}.tar.xz
 	                  COMMENT "Pack the artifact and generate the hashes...")
 
 
@@ -100,11 +100,11 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	#
 	# Filter the pom.xml file.
 	#
-	SET(POM_ARTIFACT_ID  "lua-cjson")
+	SET(POM_ARTIFACT_ID  "lua${BUILDCFG_LUA_VERSION}-lua-cjson")
 	SET(POM_GROUP_ID     "com.github.openresty")
 	SET(POM_VERSION      "${PROJECT_VERSION}")
 	SET(POM_PACKAGING    "tar.xz")
 	CONFIGURE_FILE(installer/pom.xml
-	               ${CPACK_OUTPUT_FILE_PREFIX}/lua-cjson-${PROJECT_VERSION}.pom
+	               ${CPACK_OUTPUT_FILE_PREFIX}/lua${BUILDCFG_LUA_VERSION}-lua-cjson-${PROJECT_VERSION}.pom
 	               @ONLY)
 ENDIF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
