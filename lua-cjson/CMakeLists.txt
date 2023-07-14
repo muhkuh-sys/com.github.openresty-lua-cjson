@@ -41,13 +41,6 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	                    INSTALL_COMMAND make install
 	)
 
-	IF((CMAKE_SYSTEM_NAME STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
-		# Here are the MinGW specific tests.
-		ADD_TEST(NAME lua_cjson_MinGW_DLL_dependencies
-		         COMMAND "${PYTHON_INTERPRETER}" ${CMAKE_SOURCE_DIR}/cmake/tests/mingw_dll_dependencies.py -u lua5.1 -u lua5.2 -u lua5.3 -u lua5.4 ${CMAKE_CURRENT_BINARY_DIR}/install/cjson.dll)
-	ENDIF((CMAKE_SYSTEM_NAME STREQUAL "Windows") AND (${CMAKE_COMPILER_IS_GNUCC}))
-
-
 	#----------------------------------------------------------------------------
 	#
 	# Build a package for the selected platform.
@@ -59,25 +52,14 @@ IF((${BUILDCFG_ONLY_JONCHKI_CFG} STREQUAL "OFF"))
 	SET(CPACK_GENERATOR "TXZ")
 	INCLUDE(CPack)
 
-	IF(${JONCHKI_PLATFORM_DIST_ID} STREQUAL "windows")
-		# Package a windows build.
+	# Package a linux build.
 
-		CONFIGURE_FILE(installer/install_windows.lua
-		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
-		               @ONLY)
+	CONFIGURE_FILE(installer/install_linux.lua
+	               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
+	               @ONLY)
 
-		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/install/${INSTALL_DIR_LUA_MODULES}/cjson.dll
-		        DESTINATION ${INSTALL_DIR_LUA_MODULES})
-	ELSE(${JONCHKI_PLATFORM_DIST_ID} STREQUAL "windows")
-		# Package a linux build.
-
-		CONFIGURE_FILE(installer/install_linux.lua
-		               ${CMAKE_CURRENT_BINARY_DIR}/package/install.lua
-		               @ONLY)
-
-		INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/install/${INSTALL_DIR_LUA_MODULES}/cjson.so
-		        DESTINATION ${INSTALL_DIR_LUA_MODULES})
-	ENDIF(${JONCHKI_PLATFORM_DIST_ID} STREQUAL "windows")
+	INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/install/${INSTALL_DIR_LUA_MODULES}/cjson.so
+	        DESTINATION ${INSTALL_DIR_LUA_MODULES})
 
 	INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/lua-cjson/src/TARGET_lua_cjson/lua/cjson/util.lua
 	        DESTINATION ${INSTALL_DIR_LUA_SCRIPTS}/cjson)
